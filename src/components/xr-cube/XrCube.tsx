@@ -4,11 +4,11 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useRef } from "react";
 
-const CanvasInsides = () => {
+const XrCube = () => {
   const cubeRef = useRef();
   useFrame((state, delta) => {
     cubeRef.current.rotation.y += 0.02;
-    console.log("cubeRef?.current:::", cubeRef?.current);
+    // console.log("cubeRef?.current:::", cubeRef?.current);
   });
 
   return (
@@ -23,4 +23,4 @@ const CanvasInsides = () => {
   );
 };
 
-export default CanvasInsides;
+export default XrCube;
