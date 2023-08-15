@@ -6,17 +6,17 @@ import { useRef } from "react";
 
 const XrCube = () => {
   const cubeRef = useRef();
-  useFrame((state, delta) => {
-    cubeRef.current.rotation.y += 0.02;
-    // console.log("cubeRef?.current:::", cubeRef?.current);
-  });
+  // useFrame((state, delta) => {
+  //   cubeRef.current.rotation.y += 0.02;
+  //   // console.log("cubeRef?.current:::", cubeRef?.current);
+  // });
 
   return (
     <>
       <OrbitControls />
       <ambientLight />
       <mesh ref={cubeRef}>
-        <boxGeometry args={[2, 2, 2]} />
+        <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial color="mediumpurple" />
       </mesh>
     </>
