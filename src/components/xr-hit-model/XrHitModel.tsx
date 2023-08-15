@@ -2,18 +2,18 @@ import { OrbitControls } from "@react-three/drei";
 import { Matrix4 } from "@react-three/fiber";
 import { Interactive, useHitTest, useXR } from "@react-three/xr";
 import { useRef, useState } from "react";
-import XrCube from "./XrCube";
+import XrModel from "./XrModel";
 
-type PlacedCube = {
+type PlacedModel = {
   position: any;
   id: number;
 };
 
-const XrHitCube = () => {
+const XrHitModel = () => {
   const { isPresenting } = useXR();
 
   const reticleRef = useRef();
-  const [cubes, setCubes] = useState<PlacedCube[]>([]);
+  const [models, setModels] = useState<PlacedModel[]>([]);
 
   useHitTest((hitMatrix: Matrix4, hit: XRHitTestResult) => {
     hitMatrix.decompose(
@@ -25,11 +25,10 @@ const XrHitCube = () => {
     reticleRef?.current?.rotation?.set(-Math.PI / 2, 0, 0);
   });
 
-  const placeCube = (e) => {
+  const placeModel = (e) => {
     let position = e.intersection.object.position.clone();
     let id = Date.now();
-    setCubes((prev) => [
-      ...prev,
+    setModels([
       {
         position,
         id,
@@ -42,20 +41,20 @@ const XrHitCube = () => {
       <OrbitControls />
       <ambientLight />
       {isPresenting &&
-        cubes.map((cube) => {
-          return <XrCube key={cube.id} position={cube.position} />;
+        models.map((model) => {
+          return <XrModel key={model.id} position={model.position} />;
         })}
       {isPresenting && (
-        <Interactive onSelect={placeCube}>
+        <Interactive onSelect={placeModel}>
           <mesh ref={reticleRef} rotation-x={-Math.PI / 2}>
             <ringGeometry args={[0.1, 0.25, 32]} />
             <meshStandardMaterial color="white" />
           </mesh>
         </Interactive>
       )}
-      {!isPresenting && <XrCube />}
+      {!isPresenting && <XrModel />}
     </>
   );
 };
 
-export default XrHitCube;
+export default XrHitModel;
