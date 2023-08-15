@@ -33,13 +33,10 @@ const XrHitCube = () => {
         id,
       },
     ]);
-
-    console.log("e:::", e);
   };
 
   return (
     <>
-      {" "}
       <OrbitControls />
       <ambientLight />
       {cubes.map((cube) => {
